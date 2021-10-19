@@ -19,6 +19,7 @@
                 <td>Kota</td>
                 <td>Provinsi</td>
                 <td>Foto</td>
+                <td>File_Path</td>
             </tr>
             @foreach($customer as $cust)
             <tr>
@@ -29,8 +30,10 @@
                 <td>{{ $cust->ec_subdistricts->ec_districts->dis_name }}</td>
                 <td>{{ $cust->ec_subdistricts->ec_districts->ec_cities->city_name }}</td>
                 <td>{{ $cust->ec_subdistricts->ec_districts->ec_cities->ec_provinces->prov_name }}</td>
-                <td>Default</td>
+                <td><img width="150px" src="{{ $cust->foto }}"/></td>
+                <td><img width="150px" src="{{ url ('/uploads/'.$cust->file_path) }}"/></td>
             </tr>
+
             @endforeach
         </table>
     </div>

@@ -73,16 +73,43 @@ class customerController extends Controller
 }
 public function store2(Request $request)
 {
-	// insert data ke table
+    $img =  $request->get('image');
+    $folderPath = "uploads/";
+    $image_parts = explode(";base64,", $img);
+
+    foreach ($image_parts as $key => $image){
+        $image_base64 = base64_decode($image);
+    }
+
+    $fileName = uniqid() . '.png';
+    $file = $folderPath . $fileName;
+    file_put_contents($file, $image_base64);
+
+    // insert data ke table
 	DB::table('customer')->insert([
 		'id_customer' => $request->id,
 		'nama' => $request->nama,
 		'alamat' => $request->alamat,
-		'id_kel' => $request->ec_subdistricts
-	]);
-	// alihkan halaman ke halaman
-	return redirect('/tambahCust2');
+		'id_kel' => $request->ec_subdistricts,
+        'file_path' => $fileName
+    ]);
+    
+    return redirect('/tambahCust2')->with('success', 'Data submitted Successfully');
  
 }
+
+// public function store2(Request $request)
+// {
+// 	// insert data ke table
+// 	DB::table('customer')->insert([
+// 		'id_customer' => $request->id,
+// 		'nama' => $request->nama,
+// 		'alamat' => $request->alamat,
+// 		'id_kel' => $request->ec_subdistricts
+// 	]);
+// 	// alihkan halaman ke halaman
+// 	return redirect('/tambahCust2');
+ 
+// }
 
 }

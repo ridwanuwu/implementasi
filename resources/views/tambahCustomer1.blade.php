@@ -1,22 +1,22 @@
 @extends('Template.master')
 
-@section('title', 'Tambah Customer 1')
+@section('title','Tambah Customer 1')
 
 @section('content')
 <div class="card">
     <div class="card-body">
-        <h1 align="center">TAMBAH CUSTOMER 1 </h1>
+        <h1 align="center">Tambah Customer 1 </h1>
     </div>
     <div class="card-body">
 		<form action="/tambahCustomer1/store1" method="post">
 		{{ csrf_field() }}
-            <div class="form-group row">
+            <!-- <div class="form-group row">
 			    <label class="col-2 col-form-label">ID</label>
                 <div class="col-md-6">
                     <input type="text" name="id" class="form-control" required="required"   placeholder=". . ."> 
                 </div>
 			</div>
-							
+							 -->
 			<div class="form-group row">
 			    <label class="col-2 col-form-label">Nama</label>
                 <div class="col-md-6">
@@ -43,7 +43,7 @@
                 <label class="col-2 col-form-label">Kota</label>
                 <div class="col-md-6">
                     <select name="ec_cities" class="form-control">
-                        <option value="">== Pilih Provinsi Dulu ==</option>
+                        <option value="">- Pilih Provinsi -</option>
                     </select>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <label class="col-2 col-form-label">Kecamatan</label>
                 <div class="col-md-6">
                     <select name="ec_districts" class="form-control">
-                        <option value="">== Pilih Kota Dulu ==</option>
+                        <option value="">- Pilih Kota -</option>
                     </select>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                 <label class="col-2 col-form-label">Kelurahan</label>
                 <div class="col-md-6">
                     <select name="ec_subdistricts" class="form-control">
-                        <option value="">== Pilih Kecamatan Dulu ==</option>
+                        <option value="">- Pilih Kecamatan -</option>
                     </select>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     <!-- <br/> -->
                 </div>
                 <div class="col-md-6">
-                    <div id="results">Your captured image will appear here...</div>
+                    <div id="results">Foto yang anda ambil akan terpasang disini...</div>
                 </div>
             </div>
             <!-- </div> -->

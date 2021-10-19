@@ -3,7 +3,7 @@
 @section('title','Beranda')
 
 @section('css')
-<!-- internal css -->
+<!-- css tambahan -->
 @endsection
 
 @section('content')
@@ -20,6 +20,6 @@
 @endsection
 
 @section('script')
-<!-- script internal -->
+<!-- script tambahan -->
 
 @endsection

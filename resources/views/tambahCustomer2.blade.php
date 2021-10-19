@@ -5,29 +5,29 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <h1 align="center">TAMBAH CUSTOMER 2 </h1>
+        <h1 align="center">Tambah Customer 2 </h1>
     </div>
     <div class="card-body">
 		<form action="/tambahCustomer2/store2" method="post">
 		{{ csrf_field() }}
-            <div class="form-group row">
+            <!-- <div class="form-group row">
 			    <label class="col-2 col-form-label">ID</label>
                 <div class="col-md-6">
                     <input type="text" name="id" class="form-control" required="required"   placeholder=". . ."> 
                 </div>
 			</div>
-							
+							 -->
 			<div class="form-group row">
 			    <label class="col-2 col-form-label">Nama</label>
                 <div class="col-md-6">
-                    <input type="text" name="nama" class="form-control" required="required"         placeholder=". . ."> 
+                    <input type="text" name="nama" class="form-control" required="required"  placeholder="Masukkan Nama"> 
                 </div>
 			</div>
 							
             <div class="form-group row">
 			    <label class="col-2 col-form-label">Alamat</label>
                 <div class="col-md-6">
-                    <input type="text" name="alamat" class="form-control" required="required"   placeholder=". . ."> 
+                    <input type="text" name="alamat" class="form-control" required="required"   placeholder="Masukkan Alamat"> 
                 </div>
 			</div>
 
@@ -43,7 +43,7 @@
                 <label class="col-2 col-form-label">Kota</label>
                 <div class="col-md-6">
                     <select name="ec_cities" class="form-control">
-                        <option value="">== Pilih Provinsi Dulu ==</option>
+                        <option value="">- Pilih Provinsi -</option>
                     </select>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <label class="col-2 col-form-label">Kecamatan</label>
                 <div class="col-md-6">
                     <select name="ec_districts" class="form-control">
-                        <option value="">== Pilih Kota Dulu ==</option>
+                        <option value="">- Pilih Kota -</option>
                     </select>
                 </div>
             </div>
@@ -61,10 +61,24 @@
                 <label class="col-2 col-form-label">Kelurahan</label>
                 <div class="col-md-6">
                     <select name="ec_subdistricts" class="form-control">
-                        <option value="">== Pilih Kecamatan Dulu ==</option>
+                        <option value="">- Pilih Kecamatan -</option>
                     </select>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-2" id="my_camera"></div>
+                    <input type=button value="Take Snapshot" onClick="take_snapshot()">
+                    <input type="hidden" name="image" class="image-tag">
+                    <!-- <br/> -->
+                </div>
+                <div class="col-md-6">
+                    <div id="results">Foto yang anda ambil akan terpasang disini...</div>
+                </div>
+            </div>
+            <!-- </div> -->
+             <br/>
 
 							
 			<div class="form-group">
@@ -154,6 +168,22 @@
                    }
                 });
         });
+
+        Webcam.set({
+            width: 400,
+            height: 300,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+  
+        Webcam.attach( '#my_camera' );
+  
+            function take_snapshot() {
+                Webcam.snap( function(data_uri) {
+                    $(".image-tag").val(data_uri);
+                    document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+                } );
+            }
     </script>
 </div>
 @endsection

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+// use App\Http\Controllers\BarangController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('beranda');
 });
+// Route::get('/barang', function () {
+//     return view('barang');
+// });
+Route::get('/barcode', function () {
+    return view('scanbarcode');
+});
+
 route::view('/home','home');
+
+route::get('/barang','BarangController@index');
+Route::get('/pdf',[BarangController::class,'cetak_pdf']);
+Route::get('cetak_barcode', 'BarangController@cetak_pdf')->name('print');
 
 route::get('/dataCustomer','customerController@indexDataCust');
 route::get('/tambahCust1','customerController@tambahCustomer1');
@@ -28,3 +39,5 @@ Route::get('tambahCustomer/getsubdistricts/{id}','customerController@getSubdistr
 
 Route::post('/tambahCustomer1/store1','customerController@store1');
 Route::post('/tambahCustomer2/store2','customerController@store2');
+
+Route::resource('barang2', 'Barang2Controller');

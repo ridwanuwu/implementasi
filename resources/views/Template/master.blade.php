@@ -7,6 +7,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
 @include('Template.header')
 @yield('css')
+
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

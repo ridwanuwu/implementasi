@@ -29,7 +29,7 @@
                 <a href="/" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
                   <p>
-                    Dashboard
+                  Dashboard
                   </p>
                 </a>
               </li>
@@ -63,6 +63,22 @@
             </ul>
           </li>
           
+          <li class="nav-item">
+                <a href="/barang" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                  Data Barang
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/barcode" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                  Barcode Scanner
+                  </p>
+                </a>
+              </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
