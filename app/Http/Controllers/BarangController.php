@@ -3,41 +3,51 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
-use Picqer\Barcode;
-use Picqer\Barcode\BarcodeGeneratorPNG;
-use Picqer\Barcode\BarcodeGeneratorJPG;
-use App\Barang;
-use PDF;
-
+use DB;
 
 class BarangController extends Controller
 {
-    //
     public function index()
     {
-        //
-        $barangs = Barang::all();
-        return view('barang', compact('barangs'));
+        $barang = DB::table('barang')->get();
+        $data = array(
+            'menu' => 'Barcode',
+            'barang' => $barang,
+            'submenu' => '',
+        );
+
+        return view('barang/viewBarang',$data); 
     }
 
-    // public function cetak_pdf()
-    // {
-    // 	// $pegawai = Pegawai::all();
-    //     $barangs = Barang::all();
-    //     $no = 1;
-    //     $pdf = PDF::loadview('barang_cetak',['barangs'=>$barangs])->setPaper('A4','potrait');
-    //     return $pdf->stream();
-    // }
-
-    public function cetak_pdf()
+    public function scanner()
     {
-    	// $pegawai = Pegawai::all();
-        $barangs = Barang::all();
-        $no = 1;
-        $pdf = PDF::loadview('barang_cetak',compact('barangs','no'))->setPaper('A4','landscape');
-        return $pdf->stream();
+        $data = array(
+            'menu' => 'scanner',
+            'submenu' => '',
+        );
+
+        return view('barang/scanner',$data); 
     }
+
+    public function formBarang()
+    {
+        $data = array(
+            'menu' => 'Barcode',
+            'submenu' => '',
+        );
+
+        return view('barang/formBarang',$data); 
+    }
+
+    public function tambahBarang(Request $post)
+    {  
+        DB::table('barang')->insert([
+            'id_barang' => $post->id,
+            'nama' => $post->nama,
+        ]);
+
+        // return redirect('/pegawai');
+        return redirect('/barang');
+    }
+    
 }

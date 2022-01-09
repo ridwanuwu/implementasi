@@ -1,10 +1,14 @@
 <!-- Sidebar user panel (optional) -->
 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          {{-- <img src="{{asset('AdminLTE/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image"> --}}
+          {{-- <img src="{{ Auth::user()->image}}" class="img-circle elevation-2" alt="User Image"> --}}
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          {{-- <a href="#" class="d-block">{{ getBasicProfile() }}</a> --}}
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="#" class="d-block">{{ Auth::user()->email }}</a>
+          
         </div>
       </div>
 
@@ -26,36 +30,37 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item">
-                <a href="/" class="nav-link">
+                <a href="/" class="nav-link {{ set_active('beranda') }}">
                   <i class="nav-icon fas fa-th"></i>
                   <p>
                   Dashboard
                   </p>
                 </a>
               </li>
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Customer
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
+          <li class="nav-item menu-close">
+              <a href="#" class="nav-link {{ set_active('dataCustomer') }} {{ set_active('tambahCust1') }} {{ set_active('tambahCust2') }}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Customer
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/dataCustomer" class="nav-link">
+                <a href="/dataCustomer" class="nav-link {{ set_active('dataCustomer') }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Customer</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/tambahCust1" class="nav-link">
+                <a href="/tambahCust1" class="nav-link {{ set_active('tambahCust1') }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Customer 1</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/tambahCust2" class="nav-link">
+                <a href="/tambahCust2" class="nav-link {{ set_active('tambahCust2') }}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Customer 2</p>
                 </a>
@@ -64,18 +69,42 @@
           </li>
           
           <li class="nav-item">
-                <a href="/barang" class="nav-link">
+                <a href="/barang" class="nav-link {{ set_active('barang') }}">
                   <i class="nav-icon fas fa-th"></i>
                   <p>
-                  Data Barang
+                  Cetak label TnJ 108
                   </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/barcode" class="nav-link">
+                <a href="/barcode" class="nav-link {{ set_active('scanbarcode') }}">
                   <i class="nav-icon fas fa-th"></i>
                   <p>
                   Barcode Scanner
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/kunjungan-toko" class="nav-link {{ set_active('kunjungan-toko') }}">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                  Kunjungan Toko
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/scan-kunjungan-toko" class="nav-link {{ set_active('scan-kunjungan-toko') }}">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                  Scan Kunjungan Toko
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/excel" class="nav-link {{ set_active('import-excel') }}">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                  Excel
                   </p>
                 </a>
               </li>

@@ -8,12 +8,9 @@
 <main class="wrapper" style="padding-top:2em">
 
     <section class="container" id="demo-content">
-      <h1 class="title">Scan Code from Video Camera</h1>
+      <h1 class="title">Silahkan Scan Barcode Anda</h1>
 
-      <div class="form-group">
-        <button type="button" class="btn btn-success" id="startButton">Start</button>
-        <button type="button" class="btn btn-success" id="resetButton">Reset</button>
-      </div>
+      
 
       <div>
         <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
@@ -24,6 +21,16 @@
         <select id="sourceSelect" style="max-width:400px">
         </select>
       </div>
+      <div class="form-group">
+        <button type="button" class="button btn btn-primary" id="startButton">Start</button>
+        <button type="button" class="button btn btn-secondary" id="resetButton">Reset</button>
+      </div>
+
+      <!-- <div class="form-group">
+          <label>Result:</label>
+          <input type="text" class="form-control barcode" id="result" placeholder="Hasil Barcode" name="barcode"> 
+          <pre><code id="result"></code></pre></input>
+      </div> -->
 
       <label>Result:</label>
       <pre><code id="result"></code></pre>
