@@ -108,6 +108,32 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item menu-close">
+                  <a href="#"
+                      class="nav-link {{ set_active('consolesc') }} {{ set_active('viewsc') }}">
+                      <i class="nav-icon fas fa-th"></i>
+                      <p>
+                          Scoreboard
+                          <i class="right fas fa-angle-left"></i>
+                      </p>
+                  </a>
+
+                  <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="/scoreboard-console" class="nav-link {{ set_active('consolesc') }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>Console</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="/scoreboard-view" class="nav-link {{ set_active('viewsc') }}">
+                              <i class="far fa-circle nav-icon"></i>
+                              <p>View</p>
+                          </a>
+                      </li>
+                     
+                  </ul>
+              </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

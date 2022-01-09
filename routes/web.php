@@ -72,9 +72,9 @@ Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider');
 Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
 
 //scoreboard
-Route::get('/scoreboard-view','ScoreboardController@index');
+Route::get('/scoreboard-view','ScoreboardController@index')->name('viewsc');
 Route::get('/scoreboard-sse','ScoreboardController@sse');
-Route::get('/scoreboard-console','ScoreboardController@console');
+Route::get('/scoreboard-console','ScoreboardController@console')->name('consolesc');
 Route::post('/scoreboard-console/update-home-name','ScoreboardController@updateHomeName');
 Route::post('/scoreboard-console/update-home-score','ScoreboardController@updateHomeScore');
 Route::post('/scoreboard-console/reset-home-score','ScoreboardController@resetHomeScore');

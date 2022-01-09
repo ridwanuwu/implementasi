@@ -27,18 +27,37 @@ input[type="number"]
 <h3 class="text-center font-weight-bold">Console Scoreboard</h3>
 <div class="container p-5">
     <div class="row text-center">
+        {{-- <div class="row-g-3"> --}}
         <div class="col-lg-6">
-            <div class="form-group">
-                <label for="name_home">Name Tim A</label>
-                <input type="text" class="form-control" id="name_home" placeholder="Name Tim" value="{{$scoreboard[0]->name_home}}">
-                <button class="btn btn-primary m-3" id="name_home_button"><i class="fas fa-pen-square"></i></button>
+            <div class="row">
+            {{-- <div class="form-group"> --}}
+                <div class="col-auto"> 
+                    <label for="name_home">Name Tim A</label>
+                </div>
+                
+                <div class="col-auto">
+                    <input type="text" class="form-control" id="name_home" placeholder="Name Tim" value="{{$scoreboard[0]->name_home}}">
+                </div>
+                
+                <div class="col-auto">
+                    <button class="btn btn-primary" id="name_home_button"><i class="fas fa-pen-square"></i></button>
+                </div>
+                <br>
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="form-group">
-                <label for="name_away">Name Tim B</label>
-                <input type="text" class="form-control" id="name_away" placeholder="Name Tim" value="{{$scoreboard[0]->name_away}}">
-                <button class="btn btn-primary m-3" id="name_away_button"><i class="fas fa-pen-square"></i></button>
+            {{-- <div class="form-group"> --}}
+            <div class="row">
+                <div class="col-auto">
+                    <label for="name_away">Name Tim B</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" class="form-control" id="name_away" placeholder="Name Tim" value="{{$scoreboard[0]->name_away}}">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" id="name_away_button"><i class="fas fa-pen-square"></i></button>
+                </div>
+                <br>
             </div>
         </div>
         <div class="col-lg-6">

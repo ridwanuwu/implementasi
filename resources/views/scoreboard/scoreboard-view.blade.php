@@ -33,7 +33,7 @@ h2{
     color: #5cbfa0;
 }
 .timer{
-  background-color:#FFF;
+  background-color:rgb(49, 172, 59);
   width:20%;
   height: 80px;
   margin-left: 400px;
@@ -41,7 +41,7 @@ h2{
   margin-top: 20px;
   top:50%; 
   text-align:center;
-  border:4px solid red;
+  /* border:4px solid red; */
 }
 .twodigit{
   background-color:#000;
@@ -74,6 +74,7 @@ h2{
 @section('dropdown-view','active')
 @section('content')
 <!-- Content Body place -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <h1 class="text-center font-weight-bold text-capitalize">ScoreBoard</h1>
 <div class="container text-center">
 <div class="timer"></div>
