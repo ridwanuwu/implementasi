@@ -32,6 +32,7 @@ class ScoreboardController extends Controller
           'detik' => $scoreboard[0]->detik,  
           'foul_home' => $scoreboard[0]->foul_home,  
           'foul_away' => $scoreboard[0]->foul_away,  
+        //   'period' => $scoreboard[0]->period,  
         );
         //$time = date('r');
         echo "data:".json_encode($array).PHP_EOL;
@@ -47,6 +48,24 @@ class ScoreboardController extends Controller
         //dd($scoreboard);
         return view('scoreboard.scoreboard-console',compact('data','scoreboard'));
     }
+
+    public function updatePeriod(Request $request){
+        DB::table('scoreboard')->update([
+            'period'=> $request->name
+        ]);
+        $data["period"] = DB::table('scoreboard')->get();
+        //dd($data);
+        return response()->json($data);
+    }
+
+    public function resetPeriod(Request $request){
+        DB::table('scoreboard')->update([
+            'period'=> 0
+        ]);
+        $data["period"] = DB::table('scoreboard')->get();
+        return response()->json($data);
+    }
+
     public function updateHomeName(Request $request){
         DB::table('scoreboard')->update([
             'name_home'=> $request->name

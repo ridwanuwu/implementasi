@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\API\MoviesController;
+use App\Http\Controllers\API\BooksController;
 // use App\Http\Controllers\movieController;
 // use App\Http\Controllers\BarangController;
 /*
@@ -75,6 +75,8 @@ Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('/scoreboard-view','ScoreboardController@index')->name('viewsc');
 Route::get('/scoreboard-sse','ScoreboardController@sse');
 Route::get('/scoreboard-console','ScoreboardController@console')->name('consolesc');
+Route::post('/scoreboard-console/update-period','ScoreBoardController@updatePeriod');
+Route::post('/scoreboard-console/reset-period','ScoreBoardController@resetPeriod');
 Route::post('/scoreboard-console/update-home-name','ScoreboardController@updateHomeName');
 Route::post('/scoreboard-console/update-home-score','ScoreboardController@updateHomeScore');
 Route::post('/scoreboard-console/reset-home-score','ScoreboardController@resetHomeScore');
@@ -90,6 +92,7 @@ Route::post('/scoreboard-console/update-timer','ScoreboardController@updateTimer
 Route::post('/update-menit-detik','ScoreboardController@update_menit_detik');
 
 
+
 Route::resource('/api/mobiles','API\MobileController');
 //movie
 Route::resource('/uploud-movie','movieController');
@@ -97,3 +100,19 @@ Route::get('/api/moviesnowplaying', 'API\MoviesController@getMoviesNP');
 Route::get('/api/moviesbrowse', 'API\MoviesController@getMoviesBrowse'); 
 Route::get('/api/moviescomingsoon', 'API\MoviesController@getMoviesCS');
 Route::get('/api/moviestiket', 'API\MoviesController@getTiket');
+
+//book
+// Route::get('/book', 'API\BooksController@book');
+// Route::get('/book/insertBook', 'API\BooksController@create');
+// Route::get('/book/editBook/{id}', 'API\BooksController@edit');
+// Route::post('/book/tambahBook', 'API\BooksController@tambahBook');
+// Route::put('/book/updateBook/{id}', 'API\BooksController@updateBook');
+// Route::delete('/book/hapus/{id}', 'API\BooksController@hapus');
+
+//book
+Route::get('/book', [BooksController::class, 'book'])->name('book');
+Route::get('/book/insertBook', [BooksController::class, 'create']);
+Route::get('/book/editBook/{id}', [BooksController::class, 'edit']);
+Route::post('/book/tambahBook', [BooksController::class, 'tambahBook']);
+Route::put('/book/updateBook/{id}', [BooksController::class, 'updateBook']);
+Route::delete('/book/hapus/{id}', [BooksController::class, 'hapus']);

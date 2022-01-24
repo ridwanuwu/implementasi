@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Book;
+use DB;
 
 class BooksController extends Controller
 {
@@ -16,15 +16,8 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //get data from table posts
-        $book = Book::latest()->get();
-
-        //make response JSON
-        return response()->json([
-        'success' => true,
-        'message' => 'List Data Post',
-        'data' => $book // <-- data post ], 200);
-        ], 200);
+        // return Book::all();
+        return response()->json(Book::all(),200);
     }
 
     /**
@@ -34,7 +27,12 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        $data = array(
+            'menu' => 'book',
+            'submenu' => '',
+        );
+
+        return view('book/insertBook',$data);
     }
 
     /**
@@ -51,7 +49,8 @@ class BooksController extends Controller
         $book->save();
 
         return response()->json([
-            "messege" => "Book record created"
+            "message" => "Book record created",
+            "data" => $book
         ], 201);
     }
 
@@ -63,15 +62,7 @@ class BooksController extends Controller
      */
     public function show($id)
     {
-        //find book by ID
-        $book = Book::findOrfail($id);
-
-        //make response JSON
-        return response()->json([
-        'success' => true,
-        'message' => 'Detail Data Buku',
-        'data' => $book
-        ], 200);
+        //
     }
 
     /**
@@ -82,7 +73,15 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book = DB::table('books')->where('id', $id)->get();
+
+        $data = array(
+            'menu' => 'book',
+            'book' => $book,
+            'submenu' => ''
+           
+        );
+        return view('book/editBook',$data);
     }
 
     /**
@@ -92,43 +91,23 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-         //set validation
-        $validator = Validator::make($request->all(), [
-            'name'   => 'required',
-            'author' => 'required',
-        ]);
-        
-        //response error validation
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        //find book by ID
-        $book = Book::findOrFail($book->id);
-
-        if($book) {
-
-            //update book
-            $book->update([
-                'name'     => $request->name,
-                'author'   => $request->author
-            ]);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'book Updated',
-                'data'    => $book  
-            ], 200);
-
-        }
-
-        //data book not found
-        return response()->json([
-            'success' => false,
-            'message' => 'book Not Found',
-        ], 404);
+        $cek_book = Book::firstWhere('id',$id);
+            if($cek_book){
+                $book = Book::find($id);
+                $book->name = $request->name;
+                $book->author = $request->author;
+                $book->save();
+                return response()->json([
+                    "message" => "Book record updated",
+                     "data" => $book
+                ],200);
+            } else {
+                return response()->json([
+                    "message" => "Book ID not found!"
+                ],404);
+            }
     }
 
     /**
@@ -139,25 +118,97 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-         //find book by ID
-        $book = book::findOrfail($id);
+        $book = Book::find($id);
+        $book->delete();
 
-        if($book) {
-
-            //delete book
-            $book->delete();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Book Deleted',
-            ], 200);
-
-        }
-
-        //data book not found
         return response()->json([
-            'success' => false,
-            'message' => 'Book Not Found',
-        ], 404);
+            "message" => "Book record deleted"
+        ]);
     }
+
+    public function book()
+    {
+        $url = 'localhost:8081/api/books';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 300);
+        $server_output = curl_exec($ch);
+        curl_close ($ch);
+        $arrVal = json_decode($server_output, true);
+
+        // $arrVal["menu"] = "book";
+        // $arrVal["submenu"] = "";
+        // $arrVal["name"] = "judul";
+        // $arrVal["author"] = "artis";
+        $data = array(
+            'menu' => 'book',
+            'book' => $arrVal,
+            'submenu' => '',
+        );
+
+        // dd($data);
+
+        return view('book/viewBook',$data); 
+    }
+
+    public function tambahBook(Request $request)
+    {  
+        $url = 'localhost:8081/api/books';
+        $ch = curl_init();
+        $data=array(
+            'name' => $request->name,
+            'author' => $request->author,
+        );
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 300);
+        $server_output = curl_exec($ch);
+        curl_close ($ch);
+        $arrVal = json_decode($server_output, true);
+
+        return redirect('/book');
+    }
+
+    public function updateBook(Request $request, $id)
+    {  
+        $url = "localhost:8081/api/books/$id";
+        $ch = curl_init();
+        $data=array(
+            'name' => $request->name,
+            'author' => $request->author,
+        );
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 300);
+        $server_output = curl_exec($ch);
+        curl_close ($ch);
+        $arrVal = json_decode($server_output, true);
+        // var_dump($data);
+
+        return redirect('/book');
+    }
+    
+    public function hapus($id)
+    {
+        $url="localhost:8081/api/books/$id";
+        
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($curl);
+        curl_close($curl);
+        // var_dump($id);
+
+	    return redirect('/book');
+    }
+
 }

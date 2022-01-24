@@ -9,6 +9,7 @@ use App\ec_districts;
 use App\ec_cities;
 use App\ec_provinces;
 use App\customer;
+use Illuminate\Support\Facades\Http;
 
 class customerController extends Controller
 {
@@ -20,6 +21,10 @@ class customerController extends Controller
         $ec_districts = ec_districts::all();
         $ec_cities = ec_cities::all();
         $ec_provinces = ec_provinces::all();
+        $response = Http::get('https://apicybercampus.unair.ac.id/api/tele/coba2');
+        // Http::dd()->get('https://apicybercampus.unair.ac.id/api/tele/coba2');
+        $response = json_decode($response);
+        // dd($response);
         //mengirim data ke view table
         return view('dataCustomer',
         compact('customer'),

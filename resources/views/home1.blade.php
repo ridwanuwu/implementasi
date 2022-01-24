@@ -1,23 +1,6 @@
-@extends('Template/master')
-
-
-@section('title','Beranda')
-
-@section('css')
-<!-- css tambahan -->
-@endsection
+@extends('layouts.app')
 
 @section('content')
-<!-- body content -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h1 align="center">Dashboard Web Deployment</h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -37,10 +20,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-<!-- script tambahan -->
-
-
 @endsection

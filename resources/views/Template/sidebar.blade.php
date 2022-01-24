@@ -108,6 +108,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/book" class="nav-link {{ set_active('book') }}">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                  Book
+                  </p>
+                </a>
+              </li>
               <li class="nav-item menu-close">
                   <a href="#"
                       class="nav-link {{ set_active('consolesc') }} {{ set_active('viewsc') }}">
